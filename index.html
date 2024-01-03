@@ -48,11 +48,12 @@
 <body>
     <div class="container">
         <h3>Enter Your Morning Punch-in Timing</h3>
+        
         <div class="input-group">
-            <input type="time" id="Intime" class="form-control" aria-label="Recipient's username with two button addons"
-                aria-describedby="button-addon4">
+            <input type="text" id="Intime" class="form-control" aria-label="Recipient's username with two button addons"
+                aria-describedby="button-addon4" placeholder="HH:mm" maxlength="5" oninput="formatTime(this)">
             <div class="input-group-append" id="button-addon4">
-                <button class="btn" type="button" onclick="getTime()">Calculate</button>
+                <button class="btn btn-outline-primary" type="button" onclick="getTime()">Calculate</button>
             </div>
         </div>
         <span>Choose Office Duration</span>
@@ -76,6 +77,25 @@
     <script>
         var intime = document.getElementById("Intime");
         intime.value = "09:15"
+        function formatTime(input) {
+            // Remove non-numeric characters
+            input.value = input.value.replace(/\D/g, '');
+
+            // Format the input as HH:mm
+            if (input.value.length > 2) {
+                const hours = input.value.slice(0, 2);
+                const minutes = input.value.slice(2, 4);
+
+                // Enforce constraints on hours and minutes
+                if (hours >= 1 && hours <= 12 && minutes >= 0 && minutes <= 59) {
+                    input.value = hours + ':' + minutes;
+                } else {
+                    // Reset input if constraints are not met
+                    input.value = '';
+                    alert('Invalid time. Please enter a valid time.');
+                }
+            }
+        }
         const getTime = () => {
             var intime = document.getElementById("Intime");
             var outtime = document.getElementById("outTime");
