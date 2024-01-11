@@ -73,7 +73,7 @@
 
         <div class="input-group">
             <input type="text" id="Intime" class="form-control" aria-label="Recipient's username with two button addons"
-                aria-describedby="button-addon4" placeholder="HH:mm" maxlength="5" oninput="formatTime(this)">
+                aria-describedby="button-addon4" placeholder="HH:mm" maxlength="5" oninput="callFormat_getTime(this)">
             <div class="input-group-append" id="button-addon4">
                 <button class="btn btn-outline-primary" type="button" onclick="getTime()">Calculate</button>
             </div>
@@ -99,6 +99,11 @@
     <script>
         var intime = document.getElementById("Intime");
         intime.value = "09:15"
+
+        function callFormat_getTime(input){
+            formatTime(input);
+            getTime();
+        }
         document.addEventListener('keydown', function (event) {
             // The 'event' object contains information about the key press
             console.log('Key pressed:', event.key);
@@ -127,7 +132,7 @@
                 }
             }
         }
-        const getTime = () => {
+        function getTime() {
             var intime = document.getElementById("Intime");
             var outtime = document.getElementById("outTime");
             var good = document.getElementById("isgood");
